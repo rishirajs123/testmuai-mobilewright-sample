@@ -45,6 +45,36 @@ set LT_USERNAME="YOUR_USERNAME"
 set LT_ACCESS_KEY="YOUR_ACCESS_KEY"
 ```
 
+### Upload the app
+
+Upload your app once to get an `lt://APP…` id, then reference that id when you run.
+This sample uses the **Proverbial** sample app; swap in your own `.apk` / `.ipa` the same way.
+
+Upload with the app-upload API:
+
+```bash
+# Android
+curl -s -u "$LT_USERNAME:$LT_ACCESS_KEY" \
+  -X POST "https://manual-api.lambdatest.com/app/upload/realDevice" \
+  -F "url=https://prod-mobile-artefacts.lambdatest.com/assets/docs/proverbial_android.apk" \
+  -F "custom_id=proverbial_android"
+
+# iOS
+curl -s -u "$LT_USERNAME:$LT_ACCESS_KEY" \
+  -X POST "https://manual-api.lambdatest.com/app/upload/realDevice" \
+  -F "url=https://prod-mobile-artefacts.lambdatest.com/assets/docs/proverbial_ios.ipa" \
+  -F "custom_id=proverbial_ios"
+```
+
+For your own build, replace `url=…` with `appFile=@/path/to/app.apk`. You can also upload from the
+[TestMu AI dashboard](https://www.testmuai.com/support/docs/). Each response returns an `app_id` —
+set it for the run:
+
+```bash
+export LT_APP_ANDROID="lt://APP_ANDROID_ID"
+export LT_APP_IOS="lt://APP_IOS_ID"
+```
+
 ### Run tests
 
 ```bash
@@ -52,7 +82,7 @@ PLATFORM=android npx mobilewright test
 PLATFORM=ios     npx mobilewright test
 ```
 
-The sample drives the Proverbial app, which is uploaded automatically from its public URL — no app upload needed. To use your own app, set `TESTMU_APP` (or `LT_APP_ANDROID` / `LT_APP_IOS`) to an `lt://APP…` id, a local `.apk`/`.ipa` path, or your own url. View results on your TestMu AI dashboard.
+View results on your TestMu AI dashboard.
 
 ### Local testing with TestMu AI Tunnel
 
