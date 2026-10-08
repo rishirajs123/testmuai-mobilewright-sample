@@ -47,28 +47,8 @@ set LT_ACCESS_KEY="YOUR_ACCESS_KEY"
 
 ### Upload the app
 
-Upload your app once to get an `lt://APP…` id, then reference that id when you run.
-This sample uses the **Proverbial** sample app; swap in your own `.apk` / `.ipa` the same way.
-
-Upload with the app-upload API:
-
-```bash
-# Android
-curl -s -u "$LT_USERNAME:$LT_ACCESS_KEY" \
-  -X POST "https://manual-api.lambdatest.com/app/upload/realDevice" \
-  -F "url=https://prod-mobile-artefacts.lambdatest.com/assets/docs/proverbial_android.apk" \
-  -F "custom_id=proverbial_android"
-
-# iOS
-curl -s -u "$LT_USERNAME:$LT_ACCESS_KEY" \
-  -X POST "https://manual-api.lambdatest.com/app/upload/realDevice" \
-  -F "url=https://prod-mobile-artefacts.lambdatest.com/assets/docs/proverbial_ios.ipa" \
-  -F "custom_id=proverbial_ios"
-```
-
-For your own build, replace `url=…` with `appFile=@/path/to/app.apk`. You can also upload from the
-[TestMu AI dashboard](https://www.testmuai.com/support/docs/). Each response returns an `app_id` —
-set it for the run:
+The app under test is referenced by an `lt://APP…` id. [Upload your app](https://www.testmuai.com/support/docs/)
+to TestMu AI once to get that id, then set it:
 
 ```bash
 export LT_APP_ANDROID="lt://APP_ANDROID_ID"

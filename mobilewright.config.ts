@@ -49,8 +49,10 @@ if (process.env.TESTMU_USERNAME || process.env.LT_USERNAME) {
     autoAcceptAlerts: true,
   });
 } else {
-  // ---- LOCAL: mobilecli (booted device) ----
-  if (app) config.projects[0].use.installApps = app;
+  // ---- LOCAL: mobilecli (the device on your machine) ----
+  // Same workflow a customer uses before the cloud: point at a local build.
+  const localApp = platform === 'ios' ? process.env.LOCAL_APP_IOS : process.env.LOCAL_APP_ANDROID;
+  if (localApp) config.projects[0].use.installApps = localApp;
   config.projects[0].use.bundleId = 'com.lambdatest.proverbial';
 }
 
